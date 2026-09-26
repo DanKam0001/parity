@@ -1,0 +1,6 @@
+.git
+runs
+__pycache__
+.venv
+bob_sessions
+
