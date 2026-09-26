@@ -1,7 +1,11 @@
 # Parity — COBOL-to-Java Equivalence Proof for Mainframe Migration
 
-**Prove that a Java rewrite of a COBOL batch program produces byte-identical
-output on every account, every field, every run.**
+**Prove that a Java rewrite of a COBOL batch program produces identical output:
+every record, every field, compared against the original COBOL running unmodified.**
+
+**Live demo:** https://parity-wlag.onrender.com (press *Run proof on data it has never seen*)
+
+![Parity running live](docs/img/parity_live.png)
 
 ---
 
