@@ -1,0 +1,985 @@
+{
+  "stats": {
+    "programs": 31,
+    "batch": 14,
+    "online": 17,
+    "jobs": 11,
+    "datasets": 26,
+    "edges": 49
+  },
+  "nodes": [
+    {
+      "id": "job:CBEXPORT",
+      "type": "job",
+      "name": "CBEXPORT"
+    },
+    {
+      "id": "job:CBIMPORT",
+      "type": "job",
+      "name": "CBIMPORT"
+    },
+    {
+      "id": "job:CREASTMT",
+      "type": "job",
+      "name": "CREASTMT"
+    },
+    {
+      "id": "job:INTCALC",
+      "type": "job",
+      "name": "INTCALC"
+    },
+    {
+      "id": "job:POSTTRAN",
+      "type": "job",
+      "name": "POSTTRAN"
+    },
+    {
+      "id": "job:READACCT",
+      "type": "job",
+      "name": "READACCT"
+    },
+    {
+      "id": "job:READCARD",
+      "type": "job",
+      "name": "READCARD"
+    },
+    {
+      "id": "job:READCUST",
+      "type": "job",
+      "name": "READCUST"
+    },
+    {
+      "id": "job:READXREF",
+      "type": "job",
+      "name": "READXREF"
+    },
+    {
+      "id": "job:TRANREPT",
+      "type": "job",
+      "name": "TRANREPT"
+    },
+    {
+      "id": "job:WAITSTEP",
+      "type": "job",
+      "name": "WAITSTEP"
+    },
+    {
+      "id": "pgm:CBACT01C",
+      "type": "batch",
+      "name": "CBACT01C",
+      "line_count": 430,
+      "copies": [
+        "CVACT01Y",
+        "CODATECN"
+      ]
+    },
+    {
+      "id": "pgm:CBACT02C",
+      "type": "batch",
+      "name": "CBACT02C",
+      "line_count": 178,
+      "copies": [
+        "CVACT02Y"
+      ]
+    },
+    {
+      "id": "pgm:CBACT03C",
+      "type": "batch",
+      "name": "CBACT03C",
+      "line_count": 178,
+      "copies": [
+        "CVACT03Y"
+      ]
+    },
+    {
+      "id": "pgm:CBACT04C",
+      "type": "batch",
+      "name": "CBACT04C",
+      "line_count": 652,
+      "copies": [
+        "CVTRA01Y",
+        "CVACT03Y",
+        "CVTRA02Y",
+        "CVACT01Y",
+        "CVTRA05Y"
+      ]
+    },
+    {
+      "id": "pgm:CBCUS01C",
+      "type": "batch",
+      "name": "CBCUS01C",
+      "line_count": 178,
+      "copies": [
+        "CVCUS01Y"
+      ]
+    },
+    {
+      "id": "pgm:CBEXPORT",
+      "type": "batch",
+      "name": "CBEXPORT",
+      "line_count": 582,
+      "copies": [
+        "CVCUS01Y",
+        "CVACT01Y",
+        "CVACT03Y",
+        "CVTRA05Y",
+        "CVACT02Y",
+        "CVEXPORT"
+      ]
+    },
+    {
+      "id": "pgm:CBIMPORT",
+      "type": "batch",
+      "name": "CBIMPORT",
+      "line_count": 487,
+      "copies": [
+        "CVCUS01Y",
+        "CVACT01Y",
+        "CVACT03Y",
+        "CVTRA05Y",
+        "CVACT02Y",
+        "CVEXPORT"
+      ]
+    },
+    {
+      "id": "pgm:CBSTM03A",
+      "type": "batch",
+      "name": "CBSTM03A",
+      "line_count": 924,
+      "copies": [
+        "COSTM01",
+        "CVACT03Y",
+        "CUSTREC",
+        "CVACT01Y"
+      ]
+    },
+    {
+      "id": "pgm:CBSTM03B",
+      "type": "batch",
+      "name": "CBSTM03B",
+      "line_count": 230,
+      "copies": []
+    },
+    {
+      "id": "pgm:CBTRN01C",
+      "type": "batch",
+      "name": "CBTRN01C",
+      "line_count": 494,
+      "copies": [
+        "CVTRA06Y",
+        "CVCUS01Y",
+        "CVACT03Y",
+        "CVACT02Y",
+        "CVACT01Y",
+        "CVTRA05Y"
+      ]
+    },
+    {
+      "id": "pgm:CBTRN02C",
+      "type": "batch",
+      "name": "CBTRN02C",
+      "line_count": 731,
+      "copies": [
+        "CVTRA06Y",
+        "CVTRA05Y",
+        "CVACT03Y",
+        "CVACT01Y",
+        "CVTRA01Y"
+      ]
+    },
+    {
+      "id": "pgm:CBTRN03C",
+      "type": "batch",
+      "name": "CBTRN03C",
+      "line_count": 649,
+      "copies": [
+        "CVTRA05Y",
+        "CVACT03Y",
+        "CVTRA03Y",
+        "CVTRA04Y",
+        "CVTRA07Y"
+      ]
+    },
+    {
+      "id": "pgm:COACTUPC",
+      "type": "online",
+      "name": "COACTUPC",
+      "line_count": 4236,
+      "copies": [
+        "CVCRD01Y",
+        "CSLKPCDY",
+        "DFHBMSCA",
+        "DFHAID",
+        "COTTL01Y",
+        "COACTUP",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSMSG02Y",
+        "CSUSR01Y",
+        "CVACT01Y",
+        "CVACT03Y",
+        "CVCUS01Y",
+        "COCOM01Y",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSSETATY",
+        "CSUTLDPY"
+      ]
+    },
+    {
+      "id": "pgm:COACTVWC",
+      "type": "online",
+      "name": "COACTVWC",
+      "line_count": 941,
+      "copies": [
+        "CVCRD01Y",
+        "COCOM01Y",
+        "DFHBMSCA",
+        "DFHAID",
+        "COTTL01Y",
+        "COACTVW",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSMSG02Y",
+        "CSUSR01Y",
+        "CVACT01Y",
+        "CVACT02Y",
+        "CVACT03Y",
+        "CVCUS01Y"
+      ]
+    },
+    {
+      "id": "pgm:COADM01C",
+      "type": "online",
+      "name": "COADM01C",
+      "line_count": 288,
+      "copies": [
+        "COCOM01Y",
+        "COADM02Y",
+        "COADM01",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSUSR01Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COBIL00C",
+      "type": "online",
+      "name": "COBIL00C",
+      "line_count": 572,
+      "copies": [
+        "COCOM01Y",
+        "COBIL00",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CVACT01Y",
+        "CVACT03Y",
+        "CVTRA05Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COBSWAIT",
+      "type": "batch",
+      "name": "COBSWAIT",
+      "line_count": 41,
+      "copies": []
+    },
+    {
+      "id": "pgm:COCRDLIC",
+      "type": "online",
+      "name": "COCRDLIC",
+      "line_count": 1459,
+      "copies": [
+        "CVCRD01Y",
+        "COCOM01Y",
+        "DFHBMSCA",
+        "DFHAID",
+        "COTTL01Y",
+        "COCRDLI",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSUSR01Y",
+        "CVACT02Y"
+      ]
+    },
+    {
+      "id": "pgm:COCRDSLC",
+      "type": "online",
+      "name": "COCRDSLC",
+      "line_count": 887,
+      "copies": [
+        "CVCRD01Y",
+        "COCOM01Y",
+        "DFHBMSCA",
+        "DFHAID",
+        "COTTL01Y",
+        "COCRDSL",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSMSG02Y",
+        "CSUSR01Y",
+        "CVACT02Y",
+        "CVCUS01Y"
+      ]
+    },
+    {
+      "id": "pgm:COCRDUPC",
+      "type": "online",
+      "name": "COCRDUPC",
+      "line_count": 1560,
+      "copies": [
+        "CVCRD01Y",
+        "COCOM01Y",
+        "DFHBMSCA",
+        "DFHAID",
+        "COTTL01Y",
+        "COCRDUP",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSMSG02Y",
+        "CSUSR01Y",
+        "CVACT02Y",
+        "CVCUS01Y"
+      ]
+    },
+    {
+      "id": "pgm:COMEN01C",
+      "type": "online",
+      "name": "COMEN01C",
+      "line_count": 308,
+      "copies": [
+        "COCOM01Y",
+        "COMEN02Y",
+        "COMEN01",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSUSR01Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:CORPT00C",
+      "type": "online",
+      "name": "CORPT00C",
+      "line_count": 649,
+      "copies": [
+        "COCOM01Y",
+        "CORPT00",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CVTRA05Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COSGN00C",
+      "type": "online",
+      "name": "COSGN00C",
+      "line_count": 260,
+      "copies": [
+        "COCOM01Y",
+        "COSGN00",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSUSR01Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COTRN00C",
+      "type": "online",
+      "name": "COTRN00C",
+      "line_count": 699,
+      "copies": [
+        "COCOM01Y",
+        "COTRN00",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CVTRA05Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COTRN01C",
+      "type": "online",
+      "name": "COTRN01C",
+      "line_count": 330,
+      "copies": [
+        "COCOM01Y",
+        "COTRN01",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CVTRA05Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COTRN02C",
+      "type": "online",
+      "name": "COTRN02C",
+      "line_count": 783,
+      "copies": [
+        "COCOM01Y",
+        "COTRN02",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CVTRA05Y",
+        "CVACT01Y",
+        "CVACT03Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COUSR00C",
+      "type": "online",
+      "name": "COUSR00C",
+      "line_count": 695,
+      "copies": [
+        "COCOM01Y",
+        "COUSR00",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSUSR01Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COUSR01C",
+      "type": "online",
+      "name": "COUSR01C",
+      "line_count": 299,
+      "copies": [
+        "COCOM01Y",
+        "COUSR01",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSUSR01Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COUSR02C",
+      "type": "online",
+      "name": "COUSR02C",
+      "line_count": 414,
+      "copies": [
+        "COCOM01Y",
+        "COUSR02",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSUSR01Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:COUSR03C",
+      "type": "online",
+      "name": "COUSR03C",
+      "line_count": 359,
+      "copies": [
+        "COCOM01Y",
+        "COUSR03",
+        "COTTL01Y",
+        "CSDAT01Y",
+        "CSMSG01Y",
+        "CSUSR01Y",
+        "DFHAID",
+        "DFHBMSCA"
+      ]
+    },
+    {
+      "id": "pgm:CSUTLDTC",
+      "type": "batch",
+      "name": "CSUTLDTC",
+      "line_count": 157,
+      "copies": []
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.CUSTDATA.VSAM.KSDS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.CUSTDATA.VSAM.KSDS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.CARDDATA.VSAM.KSDS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.CARDDATA.VSAM.KSDS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.EXPORT.DATA",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.EXPORT.DATA"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.CUSTDATA.IMPORT",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.CUSTDATA.IMPORT"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.ACCTDATA.IMPORT",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.ACCTDATA.IMPORT"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.CARDXREF.IMPORT",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.CARDXREF.IMPORT"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.TRANSACT.IMPORT",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.TRANSACT.IMPORT"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.IMPORT.ERRORS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.IMPORT.ERRORS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.STATEMNT.PS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.STATEMNT.PS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.STATEMNT.HTML",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.STATEMNT.HTML"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.TCATBALF.VSAM.KSDS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.TCATBALF.VSAM.KSDS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.DISCGRP.VSAM.KSDS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.DISCGRP.VSAM.KSDS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.SYSTRAN(+1)",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.SYSTRAN(+1)"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.DALYTRAN.PS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.DALYTRAN.PS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.DALYREJS(+1)",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.DALYREJS(+1)"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.ACCTDATA.PSCOMP",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.ACCTDATA.PSCOMP"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.ACCTDATA.ARRYPS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.ACCTDATA.ARRYPS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.ACCTDATA.VBPS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.ACCTDATA.VBPS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.TRANSACT.DALY(+1)",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.TRANSACT.DALY(+1)"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.TRANTYPE.VSAM.KSDS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.TRANTYPE.VSAM.KSDS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.TRANCATG.VSAM.KSDS",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.TRANCATG.VSAM.KSDS"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.TRANREPT(+1)",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.TRANREPT(+1)"
+    },
+    {
+      "id": "AWS.M2.CARDDEMO.DATEPARM",
+      "type": "dataset",
+      "dsn": "AWS.M2.CARDDEMO.DATEPARM"
+    }
+  ],
+  "edges": [
+    {
+      "from": "job:CBEXPORT",
+      "to": "pgm:CBEXPORT",
+      "rel": "runs",
+      "step": "STEP02"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.CUSTDATA.VSAM.KSDS",
+      "to": "pgm:CBEXPORT",
+      "rel": "read",
+      "dd": "CUSTFILE"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+      "to": "pgm:CBEXPORT",
+      "rel": "read",
+      "dd": "ACCTFILE"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+      "to": "pgm:CBEXPORT",
+      "rel": "read",
+      "dd": "XREFFILE"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS",
+      "to": "pgm:CBEXPORT",
+      "rel": "read",
+      "dd": "TRANSACT"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.CARDDATA.VSAM.KSDS",
+      "to": "pgm:CBEXPORT",
+      "rel": "read",
+      "dd": "CARDFILE"
+    },
+    {
+      "from": "pgm:CBEXPORT",
+      "to": "AWS.M2.CARDDEMO.EXPORT.DATA",
+      "rel": "write",
+      "dd": "EXPFILE"
+    },
+    {
+      "from": "job:CBIMPORT",
+      "to": "pgm:CBIMPORT",
+      "rel": "runs",
+      "step": "STEP01"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.EXPORT.DATA",
+      "to": "pgm:CBIMPORT",
+      "rel": "read",
+      "dd": "EXPFILE"
+    },
+    {
+      "from": "pgm:CBIMPORT",
+      "to": "AWS.M2.CARDDEMO.CUSTDATA.IMPORT",
+      "rel": "write",
+      "dd": "CUSTOUT"
+    },
+    {
+      "from": "pgm:CBIMPORT",
+      "to": "AWS.M2.CARDDEMO.ACCTDATA.IMPORT",
+      "rel": "write",
+      "dd": "ACCTOUT"
+    },
+    {
+      "from": "pgm:CBIMPORT",
+      "to": "AWS.M2.CARDDEMO.CARDXREF.IMPORT",
+      "rel": "write",
+      "dd": "XREFOUT"
+    },
+    {
+      "from": "pgm:CBIMPORT",
+      "to": "AWS.M2.CARDDEMO.TRANSACT.IMPORT",
+      "rel": "write",
+      "dd": "TRNXOUT"
+    },
+    {
+      "from": "pgm:CBIMPORT",
+      "to": "AWS.M2.CARDDEMO.IMPORT.ERRORS",
+      "rel": "write",
+      "dd": "ERROUT"
+    },
+    {
+      "from": "job:CREASTMT",
+      "to": "pgm:CBSTM03A",
+      "rel": "runs",
+      "step": "STEP040"
+    },
+    {
+      "from": "pgm:CBSTM03A",
+      "to": "AWS.M2.CARDDEMO.STATEMNT.PS",
+      "rel": "write",
+      "dd": "STMTFILE"
+    },
+    {
+      "from": "pgm:CBSTM03A",
+      "to": "AWS.M2.CARDDEMO.STATEMNT.HTML",
+      "rel": "write",
+      "dd": "HTMLFILE"
+    },
+    {
+      "from": "job:INTCALC",
+      "to": "pgm:CBACT04C",
+      "rel": "runs",
+      "step": "STEP15",
+      "parm": "2022071800"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.TCATBALF.VSAM.KSDS",
+      "to": "pgm:CBACT04C",
+      "rel": "read",
+      "dd": "TCATBALF"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+      "to": "pgm:CBACT04C",
+      "rel": "read",
+      "dd": "XREFFILE"
+    },
+    {
+      "from": "pgm:CBACT04C",
+      "to": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+      "rel": "update",
+      "dd": "ACCTFILE"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.DISCGRP.VSAM.KSDS",
+      "to": "pgm:CBACT04C",
+      "rel": "read",
+      "dd": "DISCGRP"
+    },
+    {
+      "from": "pgm:CBACT04C",
+      "to": "AWS.M2.CARDDEMO.SYSTRAN(+1)",
+      "rel": "write",
+      "dd": "TRANSACT"
+    },
+    {
+      "from": "job:POSTTRAN",
+      "to": "pgm:CBTRN02C",
+      "rel": "runs",
+      "step": "STEP15"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.DALYTRAN.PS",
+      "to": "pgm:CBTRN02C",
+      "rel": "read",
+      "dd": "DALYTRAN"
+    },
+    {
+      "from": "pgm:CBTRN02C",
+      "to": "AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS",
+      "rel": "write",
+      "dd": "TRANFILE"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+      "to": "pgm:CBTRN02C",
+      "rel": "read",
+      "dd": "XREFFILE"
+    },
+    {
+      "from": "pgm:CBTRN02C",
+      "to": "AWS.M2.CARDDEMO.DALYREJS(+1)",
+      "rel": "write",
+      "dd": "DALYREJS"
+    },
+    {
+      "from": "pgm:CBTRN02C",
+      "to": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+      "rel": "update",
+      "dd": "ACCTFILE"
+    },
+    {
+      "from": "pgm:CBTRN02C",
+      "to": "AWS.M2.CARDDEMO.TCATBALF.VSAM.KSDS",
+      "rel": "update",
+      "dd": "TCATBALF"
+    },
+    {
+      "from": "job:READACCT",
+      "to": "pgm:CBACT01C",
+      "rel": "runs",
+      "step": "STEP05"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+      "to": "pgm:CBACT01C",
+      "rel": "read",
+      "dd": "ACCTFILE"
+    },
+    {
+      "from": "pgm:CBACT01C",
+      "to": "AWS.M2.CARDDEMO.ACCTDATA.PSCOMP",
+      "rel": "write",
+      "dd": "OUTFILE"
+    },
+    {
+      "from": "pgm:CBACT01C",
+      "to": "AWS.M2.CARDDEMO.ACCTDATA.ARRYPS",
+      "rel": "write",
+      "dd": "ARRYFILE"
+    },
+    {
+      "from": "pgm:CBACT01C",
+      "to": "AWS.M2.CARDDEMO.ACCTDATA.VBPS",
+      "rel": "write",
+      "dd": "VBRCFILE"
+    },
+    {
+      "from": "job:READCARD",
+      "to": "pgm:CBACT02C",
+      "rel": "runs",
+      "step": "STEP05"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.CARDDATA.VSAM.KSDS",
+      "to": "pgm:CBACT02C",
+      "rel": "read",
+      "dd": "CARDFILE"
+    },
+    {
+      "from": "job:READCUST",
+      "to": "pgm:CBCUS01C",
+      "rel": "runs",
+      "step": "STEP05"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.CUSTDATA.VSAM.KSDS",
+      "to": "pgm:CBCUS01C",
+      "rel": "read",
+      "dd": "CUSTFILE"
+    },
+    {
+      "from": "job:READXREF",
+      "to": "pgm:CBACT03C",
+      "rel": "runs",
+      "step": "STEP05"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+      "to": "pgm:CBACT03C",
+      "rel": "read",
+      "dd": "XREFFILE"
+    },
+    {
+      "from": "job:TRANREPT",
+      "to": "pgm:CBTRN03C",
+      "rel": "runs",
+      "step": "STEP10R"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.TRANSACT.DALY(+1)",
+      "to": "pgm:CBTRN03C",
+      "rel": "read",
+      "dd": "TRANFILE"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+      "to": "pgm:CBTRN03C",
+      "rel": "read",
+      "dd": "CARDXREF"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.TRANTYPE.VSAM.KSDS",
+      "to": "pgm:CBTRN03C",
+      "rel": "read",
+      "dd": "TRANTYPE"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.TRANCATG.VSAM.KSDS",
+      "to": "pgm:CBTRN03C",
+      "rel": "read",
+      "dd": "TRANCATG"
+    },
+    {
+      "from": "pgm:CBTRN03C",
+      "to": "AWS.M2.CARDDEMO.TRANREPT(+1)",
+      "rel": "write",
+      "dd": "TRANREPT"
+    },
+    {
+      "from": "AWS.M2.CARDDEMO.DATEPARM",
+      "to": "pgm:CBTRN03C",
+      "rel": "read",
+      "dd": "DATEPARM"
+    },
+    {
+      "from": "job:WAITSTEP",
+      "to": "pgm:COBSWAIT",
+      "rel": "runs",
+      "step": "WAIT"
+    }
+  ]
+}
