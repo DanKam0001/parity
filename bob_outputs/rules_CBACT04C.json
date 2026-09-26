@@ -1,0 +1,75 @@
+{
+  "summary": "CBACT04C is a batch interest-calculation program. It reads the transaction-category balance file (TCATBAL) sequentially, keyed by account/type/category. For each category balance it looks up an annual interest rate from the disclosure-group file (DISCGRP), computes one month's interest as (balance × rate) / 1200, accumulates that into a per-account total, and writes one transaction record per category. When the account changes (or EOF is reached) it rewrites the account record with the accumulated interest added to the current balance and with cycle credit/debit counters zeroed. Fees are not implemented. The program abends on any unexpected file error.",
+  "rules": [
+    {
+      "id": "R1",
+      "title": "Monthly interest formula with implicit truncation",
+      "rule": "Monthly interest for one transaction category equals (category balance × annual rate) ÷ 1200. The result is stored in WS-MONTHLY-INT (PIC S9(09)V99). Because no ROUNDED clause is used, any sub-cent fraction is silently dropped toward zero (truncation). A small balance with a small rate may produce 0.00 after truncation, yet the transaction record is still written (see R4).",
+      "kind": "calculation",
+      "lines": [464, 465]
+    },
+    {
+      "id": "R2",
+      "title": "Balance update and cycle-counter reset on account change",
+      "rule": "When the account ID changes between successive TCATBAL records, or when end-of-file is reached, the program adds the accumulated monthly interest total (WS-TOTAL-INT, sum of all categories) to the account's current balance (ACCT-CURR-BAL) and then resets both ACCT-CURR-CYC-CREDIT and ACCT-CURR-CYC-DEBIT to zero. The updated account record is then rewritten to the account master file. This is the only place the account balance is permanently changed.",
+      "kind": "update",
+      "lines": [350, 370]
+    },
+    {
+      "id": "R3",
+      "title": "Zero-rate skip: no interest or fee computed when rate is 0",
+      "rule": "After reading the disclosure-group record, if the interest rate (DIS-INT-RATE) is exactly zero the program skips both the interest calculation and the fee calculation entirely. No transaction record is written for that category. The category balance is not added to WS-TOTAL-INT, so it does not affect the account balance update.",
+      "kind": "control",
+      "lines": [214, 217]
+    },
+    {
+      "id": "R4",
+      "title": "One transaction record written per category even when interest truncates to 0.00",
+      "rule": "For every category where DIS-INT-RATE is non-zero, the program computes interest and immediately calls 1300-B-WRITE-TX. There is no guard checking whether WS-MONTHLY-INT is non-zero before writing. Consequently, a transaction record with TRAN-AMT = 0.00 will be written whenever the formula truncates below one cent. The transaction type is always '01', category code '05', source 'System', description 'Int. for a/c <ACCT-ID>'.",
+      "kind": "output",
+      "lines": [473, 515]
+    },
+    {
+      "id": "R5",
+      "title": "Default interest-rate fallback when account group not found in DISCGRP",
+      "rule": "If the initial read of the disclosure-group file fails with FILE STATUS '23' (record not found for this account's group/type/category key), the program does not abend. Instead it sets the group-ID portion of the key to the literal 'DEFAULT' (left-padded to 10 characters) while keeping the same transaction type and category codes, then performs a second read (1200-A-GET-DEFAULT-INT-RATE). If that second read also fails, the program abends. There is no INVALID KEY clause on the second read, so a missing DEFAULT record causes an unhandled error path.",
+      "kind": "default",
+      "lines": [415, 460]
+    },
+    {
+      "id": "R6",
+      "title": "Transaction ID constructed by concatenating run date and a sequence counter",
+      "rule": "Each transaction record's TRAN-ID (PIC X(16)) is built by STRINGing the 10-character run date passed in the PARM (PARM-DATE) with a 6-digit zero-padded counter (WS-TRANID-SUFFIX), producing exactly 16 characters. The counter increments by 1 for every transaction written across the entire run, so IDs are unique within a single execution. The counter is not reset per account. If more than 999,999 transactions are written in one run the counter wraps silently.",
+      "kind": "output",
+      "lines": [474, 480]
+    },
+    {
+      "id": "R7",
+      "title": "Account lookup via alternate key on XREF file",
+      "rule": "After identifying a new account ID, the program reads the card cross-reference file using the alternate key FD-XREF-ACCT-ID (account number) rather than the primary key (card number). The result is stored in CARD-XREF-RECORD. The card number found (XREF-CARD-NUM) is subsequently copied into every transaction record written for that account. If no cross-reference record exists for an account the program abends.",
+      "kind": "lookup",
+      "lines": [393, 413]
+    },
+    {
+      "id": "R8",
+      "title": "Last-account bug: balance and cycle counters never updated for the final account",
+      "rule": "PERFORM UNTIL is test-before: when 1000-TCATBALF-GET-NEXT sets END-OF-FILE='Y', control returns to the loop condition, which is now true, and the loop exits immediately. The ELSE branch at line 219 (PERFORM 1050-UPDATE-ACCOUNT) is therefore dead code and never executes for any input, including a non-empty file. The consequence is that the last account in the file always has its interest transactions written to TRANSACT, but its ACCT-CURR-BAL is never incremented, and ACCT-CURR-CYC-CREDIT/DEBIT are never zeroed. The account master record for the final account is not rewritten at all. This has been confirmed by run output: the last account record is byte-for-byte unchanged after the run.",
+      "kind": "risk",
+      "lines": [188, 222]
+    },
+    {
+      "id": "R9",
+      "title": "Empty fee routine: fees are never calculated",
+      "rule": "Paragraph 1400-COMPUTE-FEES is called for every category where the interest rate is non-zero, but the paragraph body contains only EXIT. No fee is computed, no fee transaction is written, and no fee amount is accumulated. The stub is marked 'To be implemented' in a comment. Any fee logic that business rules require is entirely absent.",
+      "kind": "risk",
+      "lines": [518, 520]
+    },
+    {
+      "id": "R10",
+      "title": "Interest accumulated per account then posted as a single balance delta",
+      "rule": "WS-TOTAL-INT accumulates the sum of WS-MONTHLY-INT across all categories for one account. It is reset to zero when a new account is detected. At account-change time (or EOF) the entire accumulated total is added to ACCT-CURR-BAL in a single arithmetic statement. Individual per-category transaction records are written during processing but the balance change is a single bulk addition, not one addition per transaction.",
+      "kind": "calculation",
+      "lines": [200, 200]
+    }
+  ]
+}
