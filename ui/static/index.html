@@ -1,1 +1,118 @@
-<!DOCTYPE html><html><head><title>Parity</title></head><body><p>Parity UI — coming soon.</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parity · modernise COBOL, with proof</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header id="top-header">
+    <div class="header-inner">
+      <span class="header-logo">= Parity</span>
+      <span class="header-tagline">modernise COBOL, with proof</span>
+      <nav class="header-nav">
+        <a href="#s1">Map</a>
+        <a href="#s2">Rules</a>
+        <a href="#s3">Translation</a>
+        <a href="#s4">Decoder</a>
+        <a href="#s5">Edge Cases</a>
+        <a href="#s6">Side by Side</a>
+        <a href="#s7">Proof</a>
+        <a href="#s8">Mutants</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Section 1: System Map -->
+  <section id="s1" class="section">
+    <h2 class="section-title"><span class="section-num">1</span> System Map</h2>
+    <div id="stat-tiles" class="stat-tiles"></div>
+    <div id="sysmap-container" class="sysmap-container">
+      <svg id="sysmap-svg"></svg>
+    </div>
+  </section>
+
+  <!-- Section 2: Business Rules -->
+  <section id="s2" class="section">
+    <h2 class="section-title"><span class="section-num">2</span> Business Rules</h2>
+    <div id="rules-grid" class="rules-grid"></div>
+  </section>
+
+  <!-- Section 3: Translation Layer -->
+  <section id="s3" class="section">
+    <h2 class="section-title"><span class="section-num">3</span> Translation Layer</h2>
+    <div class="translation-toolbar">
+      <button id="btn-convert" class="btn-primary">Convert all links</button>
+      <span id="convert-status" class="convert-status"></span>
+    </div>
+    <div class="translation-layout">
+      <div id="translation-list" class="translation-list"></div>
+      <div id="translation-panes" class="translation-panes hidden">
+        <div class="code-pane">
+          <div class="pane-label">COBOL — CBACT04C.cbl</div>
+          <pre id="cobol-pane" class="code-pre"></pre>
+        </div>
+        <div class="code-pane">
+          <div class="pane-label">Java — Cbact04c.java</div>
+          <pre id="java-pane" class="code-pre"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Record Decoder -->
+  <section id="s4" class="section">
+    <h2 class="section-title"><span class="section-num">4</span> Record Decoder</h2>
+    <div id="decoder-container"></div>
+  </section>
+
+  <!-- Section 5: Edge Cases -->
+  <section id="s5" class="section">
+    <h2 class="section-title"><span class="section-num">5</span> Edge Cases</h2>
+    <div id="edge-cases-grid" class="edge-cases-grid"></div>
+  </section>
+
+  <!-- Section 6: Side by Side -->
+  <section id="s6" class="section">
+    <h2 class="section-title"><span class="section-num">6</span> Side by Side, Byte for Byte</h2>
+    <div class="sbs-toolbar">
+      <select id="sbs-tx-select" class="sbs-select"></select>
+      <label class="toggle-label">
+        <input type="checkbox" id="sbs-bug-toggle">
+        <span>Show a planted bug</span>
+      </label>
+    </div>
+    <div id="sbs-chars" class="sbs-chars"></div>
+    <table id="sbs-field-table" class="sbs-table"></table>
+  </section>
+
+  <!-- Section 7: The Proof -->
+  <section id="s7" class="section">
+    <h2 class="section-title"><span class="section-num">7</span> The Proof</h2>
+    <div id="proof-summary"></div>
+    <div id="proof-meters" class="proof-meters"></div>
+    <div id="confirm-seeds" class="confirm-seeds"></div>
+    <div class="prove-controls">
+      <input id="prove-seed" type="number" value="99" min="1" max="9999" class="seed-input">
+      <button id="btn-run-proof" class="btn-primary">Run proof on data it has never seen</button>
+    </div>
+    <pre id="prove-log" class="prove-log hidden"></pre>
+  </section>
+
+  <!-- Section 8: Planted Bugs -->
+  <section id="s8" class="section">
+    <h2 class="section-title"><span class="section-num">8</span> Planted Bugs</h2>
+    <div id="mutants-header" class="mutants-header"></div>
+    <div id="mutants-grid" class="mutants-grid"></div>
+  </section>
+
+  <!-- Fake cursor for demo -->
+  <div id="demo-cursor" class="demo-cursor"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
