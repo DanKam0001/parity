@@ -1,0 +1,20 @@
+[
+  {
+    "seed": 11,
+    "accounts": 2000,
+    "passed": true,
+    "verdict": "ACCTFILE 2000/2000 \u00b7 TRANSACT 3311/3311 \u00b7 EQUIVALENT"
+  },
+  {
+    "seed": 23,
+    "accounts": 2000,
+    "passed": true,
+    "verdict": "ACCTFILE 2000/2000 \u00b7 TRANSACT 3262/3262 \u00b7 EQUIVALENT"
+  },
+  {
+    "seed": 42,
+    "accounts": 2000,
+    "passed": true,
+    "verdict": "ACCTFILE 2000/2000 \u00b7 TRANSACT 3289/3289 \u00b7 EQUIVALENT"
+  }
+]

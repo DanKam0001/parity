@@ -166,6 +166,8 @@ def _acct_record(
     acct_id: int,
     group: str,
     curr_bal: Decimal,
+    cyc_credit: Decimal,
+    cyc_debit: Decimal,
     credit_limit: Decimal = Decimal("20000.00"),
     cash_limit: Decimal = Decimal("10000.00"),
 ) -> str:
@@ -179,8 +181,8 @@ def _acct_record(
         + "2014-01-01"                      # ACCT-OPEN-DATE
         + "2030-01-01"                      # ACCT-EXPIRAION-DATE
         + "2030-01-01"                      # ACCT-REISSUE-DATE
-        + _fmt_signed(Decimal("0.00"), 10, 2)  # ACCT-CURR-CYC-CREDIT
-        + _fmt_signed(Decimal("0.00"), 10, 2)  # ACCT-CURR-CYC-DEBIT
+        + _fmt_signed(cyc_credit, 10, 2)    # ACCT-CURR-CYC-CREDIT
+        + _fmt_signed(cyc_debit, 10, 2)     # ACCT-CURR-CYC-DEBIT
         + " " * 10                          # ACCT-ADDR-ZIP
         + group[:10].ljust(10)             # ACCT-GROUP-ID
     )
@@ -352,8 +354,12 @@ def generate(accounts: int, seed: int, out_dir: str | os.PathLike) -> list[Accou
                 _tcatbal_record(acct_id, type_cd, cat_cd, bal)
             )
 
+        # ── choose ACCT-CURR-CYC-CREDIT and ACCT-CURR-CYC-DEBIT ──────────
+        cyc_credit = Decimal(rng.randint(1, 300000)) / 100
+        cyc_debit  = Decimal(rng.randint(1, 300000)) / 100
+
         # ── emit account / xref records ───────────────────────────────────
-        acct_lines.append(_acct_record(acct_id, group, curr_bal))
+        acct_lines.append(_acct_record(acct_id, group, curr_bal, cyc_credit, cyc_debit))
         xref_lines.append(_xref_record(card_num, cust_id, acct_id))
         tags.append(AccountTag(acct_id=acct_id, tags=frozenset(account_tags)))
 

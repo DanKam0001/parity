@@ -1,0 +1,236 @@
+[
+  {
+    "id": "helpful-fix",
+    "description": "Post the last account's interest and reset its cycle totals after the loop (fixes the faithful last-account bug, breaking parity)",
+    "edit": {
+      "search": "        tranOut.close();",
+      "replace": "        if (!wsFirstTime && accountRecord != null) {\n            perform1050UpdateAccount(accountRecord, acctByKey,\n                    wsLastAcctNum, wsTotalInt);\n        }\n        tranOut.close();"
+    },
+    "compile_ok": true,
+    "compile_error": "",
+    "caught": true,
+    "verdict": "ACCTFILE 1999/2000 \u00b7 TRANSACT 3321/3321 \u00b7 DIFFERENCES FOUND",
+    "fields": [
+      {
+        "file": "acctfile",
+        "field": "ACCT-CURR-BAL",
+        "mismatch_count": 1,
+        "example": {
+          "key": "2000",
+          "cobol_value": "1234.56",
+          "java_value": "2439.11"
+        }
+      },
+      {
+        "file": "acctfile",
+        "field": "ACCT-CURR-CYC-CREDIT",
+        "mismatch_count": 1,
+        "example": {
+          "key": "2000",
+          "cobol_value": "1938.47",
+          "java_value": "0.00"
+        }
+      },
+      {
+        "file": "acctfile",
+        "field": "ACCT-CURR-CYC-DEBIT",
+        "mismatch_count": 1,
+        "example": {
+          "key": "2000",
+          "cobol_value": "2348.11",
+          "java_value": "0.00"
+        }
+      }
+    ]
+  },
+  {
+    "id": "rounding",
+    "description": "Use RoundingMode.HALF_UP instead of RoundingMode.DOWN when computing monthly interest (should be truncation)",
+    "edit": {
+      "search": "        return catBal.multiply(intRate)\n                     .divide(BigDecimal.valueOf(1200), 2, RoundingMode.DOWN);",
+      "replace": "        return catBal.multiply(intRate)\n                     .divide(BigDecimal.valueOf(1200), 2, RoundingMode.HALF_UP);"
+    },
+    "compile_ok": true,
+    "compile_error": "",
+    "caught": true,
+    "verdict": "ACCTFILE 978/2000 \u00b7 TRANSACT 1745/3321 \u00b7 DIFFERENCES FOUND",
+    "fields": [
+      {
+        "file": "acctfile",
+        "field": "ACCT-CURR-BAL",
+        "mismatch_count": 1022,
+        "example": {
+          "key": "1",
+          "cobol_value": "409354.45",
+          "java_value": "409354.44"
+        }
+      },
+      {
+        "file": "transact",
+        "field": "TRAN-AMT",
+        "mismatch_count": 1576,
+        "example": {
+          "key": "2022071800000002",
+          "cobol_value": "-8990.60",
+          "java_value": "-8990.61"
+        }
+      }
+    ]
+  },
+  {
+    "id": "floats",
+    "description": "Compute monthly interest with double arithmetic then convert to BigDecimal (introduces floating-point rounding errors)",
+    "edit": {
+      "search": "        return catBal.multiply(intRate)\n                     .divide(BigDecimal.valueOf(1200), 2, RoundingMode.DOWN);",
+      "replace": "        double _d = catBal.doubleValue() * intRate.doubleValue() / 1200.0;\n        return BigDecimal.valueOf(_d).setScale(2, RoundingMode.DOWN);"
+    },
+    "compile_ok": true,
+    "compile_error": "",
+    "caught": true,
+    "verdict": "ACCTFILE 1998/2000 \u00b7 TRANSACT 3319/3321 \u00b7 DIFFERENCES FOUND",
+    "fields": [
+      {
+        "file": "acctfile",
+        "field": "ACCT-CURR-BAL",
+        "mismatch_count": 2,
+        "example": {
+          "key": "1458",
+          "cobol_value": "450715.35",
+          "java_value": "450715.34"
+        }
+      },
+      {
+        "file": "transact",
+        "field": "TRAN-AMT",
+        "mismatch_count": 2,
+        "example": {
+          "key": "2022071800002417",
+          "cobol_value": "22.44",
+          "java_value": "22.43"
+        }
+      }
+    ]
+  },
+  {
+    "id": "fallback",
+    "description": "Fall back to group ZEROAPR instead of DEFAULT when disclosure group record is missing",
+    "edit": {
+      "search": "            String defaultKey = buildDiscKey(\"DEFAULT   \", typeCd, catCd);",
+      "replace": "            String defaultKey = buildDiscKey(\"ZEROAPR   \", typeCd, catCd);"
+    },
+    "compile_ok": true,
+    "compile_error": "",
+    "caught": true,
+    "verdict": "ACCTFILE 1844/2000 \u00b7 TRANSACT 38/3321 \u00b7 DIFFERENCES FOUND",
+    "fields": [
+      {
+        "file": "acctfile",
+        "field": "ACCT-CURR-BAL",
+        "mismatch_count": 156,
+        "example": {
+          "key": "1003",
+          "cobol_value": "328102.25",
+          "java_value": "326936.54"
+        }
+      },
+      {
+        "file": "transact",
+        "field": "TRAN-DESC",
+        "mismatch_count": 2934,
+        "example": {
+          "key": "2022071800000039",
+          "cobol_value": "Int. for a/c 00000000023                                                                            ",
+          "java_value": "Int. for a/c 00000000025                                                                            "
+        }
+      },
+      {
+        "file": "transact",
+        "field": "TRAN-CARD-NUM",
+        "mismatch_count": 2934,
+        "example": {
+          "key": "2022071800000039",
+          "cobol_value": "0000000000000023",
+          "java_value": "0000000000000025"
+        }
+      },
+      {
+        "file": "transact",
+        "field": "TRAN-AMT",
+        "mismatch_count": 2925,
+        "example": {
+          "key": "2022071800000039",
+          "cobol_value": "215.52",
+          "java_value": "1083.72"
+        }
+      }
+    ]
+  },
+  {
+    "id": "cycle-reset",
+    "description": "Forget to reset ACCT-CURR-CYC-CREDIT in 1050-UPDATE-ACCOUNT (cycle credit total is not zeroed)",
+    "edit": {
+      "search": "        setAcctCurrCycCredit(accountRecord, BigDecimal.ZERO);\n        setAcctCurrCycDebit(accountRecord, BigDecimal.ZERO);",
+      "replace": "        setAcctCurrCycDebit(accountRecord, BigDecimal.ZERO);"
+    },
+    "compile_ok": true,
+    "compile_error": "",
+    "caught": true,
+    "verdict": "ACCTFILE 1/2000 \u00b7 TRANSACT 3321/3321 \u00b7 DIFFERENCES FOUND",
+    "fields": [
+      {
+        "file": "acctfile",
+        "field": "ACCT-CURR-CYC-CREDIT",
+        "mismatch_count": 1999,
+        "example": {
+          "key": "1",
+          "cobol_value": "0.00",
+          "java_value": "304.09"
+        }
+      }
+    ]
+  },
+  {
+    "id": "numbering",
+    "description": "Number transactions from 0 instead of 1 (pass suffix before incrementing so first transaction ID suffix is 000000)",
+    "edit": {
+      "search": "                        wsTranidSuffix++;\n                        perform1300bWriteTx(tranOut, parmDate, wsTranidSuffix,\n                                wsMonthlyInt, accountRecord, cardXrefRecord);",
+      "replace": "                        perform1300bWriteTx(tranOut, parmDate, wsTranidSuffix,\n                                wsMonthlyInt, accountRecord, cardXrefRecord);\n                        wsTranidSuffix++;"
+    },
+    "compile_ok": true,
+    "compile_error": "",
+    "caught": true,
+    "verdict": "ACCTFILE 2000/2000 \u00b7 TRANSACT 8/3321 \u00b7 DIFFERENCES FOUND",
+    "fields": [
+      {
+        "file": "transact",
+        "field": "TRAN-AMT",
+        "mismatch_count": 3300,
+        "example": {
+          "key": "2022071800000001",
+          "cobol_value": "-16295.93",
+          "java_value": "-8990.60"
+        }
+      },
+      {
+        "file": "transact",
+        "field": "TRAN-DESC",
+        "mismatch_count": 1609,
+        "example": {
+          "key": "2022071800000002",
+          "cobol_value": "Int. for a/c 00000000001                                                                            ",
+          "java_value": "Int. for a/c 00000000002                                                                            "
+        }
+      },
+      {
+        "file": "transact",
+        "field": "TRAN-CARD-NUM",
+        "mismatch_count": 1609,
+        "example": {
+          "key": "2022071800000002",
+          "cobol_value": "0000000000000001",
+          "java_value": "0000000000000002"
+        }
+      }
+    ]
+  }
+]
