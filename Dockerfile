@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         openjdk-17-jdk-headless \
         python3 \
         python3-venv \
+        python3-pytest \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
