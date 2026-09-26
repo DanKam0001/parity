@@ -1,7 +1,5 @@
 # Parity sandbox – debian:bookworm-slim + GnuCOBOL 3 + OpenJDK 17 + Python 3
 # Build: docker build -t parity .
-# Note: the javac step (step 9 per PLAN.md) is omitted until
-#       bob_outputs/Cbact04c.java exists (task B5).
 
 FROM debian:bookworm-slim
 
@@ -63,6 +61,10 @@ RUN cobc -x \
 RUN cobc -x \
          -o /build/UNLOADER_ACCTFILE \
          harness/UNLOADER_ACCTFILE.cbl
+
+# Step 9 – Cbact04c Java rewrite
+RUN mkdir -p /build/java && \
+    javac -encoding UTF-8 -d /build/java bob_outputs/Cbact04c.java
 
 # ── runtime environment ────────────────────────────────────────────
 ENV PATH="/build:${PATH}"
