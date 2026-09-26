@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3 \
         python3-venv \
         python3-pytest \
+        python3-fastapi \
+        python3-uvicorn \
+        python3-httpx \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -70,5 +73,8 @@ RUN mkdir -p /build/java && \
 ENV PATH="/build:${PATH}"
 ENV COB_LIBRARY_PATH="/build"
 
-# ── placeholder CMD (web server added in a later task) ────────────
-CMD ["bash"]
+# ── pre-warm: run the demo proof so report exists at startup ──────
+RUN python3 -m parity.runner --seed 7 --accounts 2000
+
+# ── web server ────────────────────────────────────────────────────
+CMD python3 -m uvicorn ui.app:app --host 0.0.0.0 --port ${PORT:-8080}
