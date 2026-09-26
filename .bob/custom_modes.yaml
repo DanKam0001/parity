@@ -29,4 +29,7 @@ customModes:
     whenToUse: Use when rewriting a COBOL program in Java, or repairing a Java
       rewrite after the equivalence proof reports differences.
     customInstructions: ""
-    groups: []
+    groups:
+      - read
+      - edit
+      - command
